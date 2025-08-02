@@ -11,7 +11,13 @@ const login = z.object({
   password: z.string().min(8),
 });
 
+const changePassword = z.object({
+  oldPassword: z.string().min(8),
+  newPassword: z.string().min(8),
+});
+
 export const ZodAuthSchema = {
   login,
   register,
+  changePassword,
 };

@@ -44,7 +44,7 @@ const login = async (payload: Partial<IUser>) => {
   const accessToken = generateAccessToken(JwtPayload);
   const refreshToken = generateRefreshToken(JwtPayload);
 
-  return { account, accessToken, refreshToken };
+  return { accessToken, refreshToken };
 };
 
 const setAccessToken = async (refreshToken: string) => {
@@ -61,6 +61,26 @@ const setAccessToken = async (refreshToken: string) => {
   const accessToken = generateAccessToken({ id, email, role });
 
   return accessToken;
+};
+
+const changePassword = async (
+  user: JwtPayload,
+  oldPassword: string,
+  newPassword: string
+) => {
+  const account = await getAccount({ jwtPayload: user, label: "Your" });
+
+  const isPasswordMatch = await comparePassword(
+    oldPassword,
+    account.password as string
+  );
+
+  if (!isPasswordMatch) {
+    throw new AppError(HTTP_STATUS.UNAUTHORIZED, "Invalid credentials.");
+  }
+
+  account.password = newPassword;
+  await account.save();
 };
 
 const registerUser = async (payload: IUser) => {
@@ -166,4 +186,5 @@ export const authService = {
   registerUser,
   registerAgent,
   registerAdmin,
+  changePassword,
 };

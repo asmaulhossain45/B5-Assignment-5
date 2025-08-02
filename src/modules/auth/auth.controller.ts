@@ -19,19 +19,18 @@ const login = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     success: true,
     statusCode: 200,
-    message: `${result.account?.role} logged in successfully`,
+    message: `Logged in successfully`,
   });
 });
 
 const logout = catchAsync(async (req: Request, res: Response) => {
-  const {role} = req.user as JwtPayload;
   res.clearCookie("accessToken");
   res.clearCookie("refreshToken");
 
   sendResponse(res, {
     success: true,
     statusCode: 200,
-    message: `${role} logged out successfully`,
+    message: `Logged out successfully`,
     data: null,
   });
 });
@@ -51,6 +50,23 @@ const setAccessToken = catchAsync(async (req: Request, res: Response) => {
     success: true,
     statusCode: 200,
     message: "Access token updated successfully",
+  });
+});
+
+const changePassword = catchAsync(async (req: Request, res: Response) => {
+  const user = req.user as JwtPayload;
+  const { oldPassword, newPassword } = req.body;
+  const result = await authService.changePassword(
+    user,
+    oldPassword,
+    newPassword
+  );
+
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "Password changed successfully",
+    data: result,
   });
 });
 
@@ -94,4 +110,5 @@ export const authController = {
   registerUser,
   registerAgent,
   registerAdmin,
+  changePassword,
 };

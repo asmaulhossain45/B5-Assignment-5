@@ -17,6 +17,13 @@ router.post("/logout", authController.logout);
 
 router.post("/refresh-token", authController.setAccessToken);
 
+router.post(
+  "/change-password",
+  validateRequest(ZodAuthSchema.changePassword),
+  checkAuth(...Object.values(UserRole)),
+  authController.changePassword
+);
+
 router.post("/register/user", authController.registerUser);
 
 router.post("/register/agent", authController.registerAgent);

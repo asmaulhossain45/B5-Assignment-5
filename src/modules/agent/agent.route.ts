@@ -27,7 +27,7 @@ router.get(
 );
 
 router.get(
-  "/commision",
+  "/commission",
   checkAuth(UserRole.AGENT),
   agentController.getCommisionHistory
 );
