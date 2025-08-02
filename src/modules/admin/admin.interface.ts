@@ -1,6 +1,6 @@
 import { Types } from "mongoose";
-import { ILocation } from "../../interfaces/common.interface";
 import { Gender, UserRole, UserStatus } from "../../constants/enums";
+import { ILocation } from "../../interfaces/common.interface";
 
 export interface IAdmin {
   _id?: Types.ObjectId;

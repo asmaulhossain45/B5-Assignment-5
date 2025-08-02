@@ -1,5 +1,6 @@
 import { Types } from "mongoose";
 import { Gender, UserRole, UserStatus } from "../../constants/enums";
+import { ILocation } from "../../interfaces/common.interface";
 
 export interface IAgent {
   _id?: Types.ObjectId;
@@ -15,11 +16,7 @@ export interface IAgent {
   role: UserRole.AGENT;
 
   businessName?: string;
-  location?: {
-    division?: string;
-    district?: string;
-    address?: string;
-  };
+  location?: ILocation;
 
   status: UserStatus;
   wallet?: Types.ObjectId;

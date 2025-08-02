@@ -52,12 +52,12 @@ const agentSchema = new Schema<IAgent>(
     location: {
       type: {
         division: {
-          type: String,
-          trim: true,
+          type: Schema.Types.ObjectId,
+          ref: "Division",
         },
         district: {
-          type: String,
-          trim: true,
+          type: Schema.Types.ObjectId,
+          ref: "District",
         },
         address: {
           type: String,

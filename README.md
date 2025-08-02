@@ -150,6 +150,11 @@ This API enables wallet-based money transactions for **Users**, **Agents**, and 
 
 ---
 
+### Query
+```
+?searchTerm=transfer&type=transfer&sort=-createdAt&fields=type,amount,createdAt&page=2&limit=5
+```
+
 ## 🧪 Sample Payload
 
 ### Login (POST `/api/v1/auth/login`)

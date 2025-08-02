@@ -146,10 +146,11 @@ const updateWalletStatusByOwner = catchAsync(
 
 const updateAgentApprovalStatus = catchAsync(
   async (req: Request, res: Response) => {
+    const admin = req.user as JwtPayload;
     const { email } = req.params;
     const { isApproved } = req.body;
 
-    const result = await adminService.updateAgentApprovalStatus(
+    const result = await adminService.updateAgentApprovalStatus(admin,
       email,
       isApproved
     );

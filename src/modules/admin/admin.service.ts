@@ -180,12 +180,13 @@ const updateWalletStatusByOwner = async (
 };
 
 const updateAgentApprovalStatus = async (
+  admin: JwtPayload,
   email: string,
   isApproved: boolean
 ) => {
   const updatedAgent = await Agent.findOneAndUpdate(
     { email: email },
-    { $set: { isApproved } },
+    { $set: { isApproved, approvedBy: admin.id, approvedAt: new Date() } },
     { new: true, runValidators: true }
   );
 
