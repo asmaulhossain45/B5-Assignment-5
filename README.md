@@ -170,6 +170,125 @@ This API enables wallet-based money transactions for **Users**, **Agents**, and 
 }
 ```
 
+### Create Account (POST `/api/v1/auth/register/user|agent|admin`)
+
+```json
+{
+  "name": "demo User",
+  "email": "demoemail@gmail.com",
+  "password": "123456789"
+}
+```
+
+### Update User | Admin (PATCH `/api/v1/users/me | /api/v1/admins/me`)
+
+```json
+{
+  "name": "demo User",
+  "dob": "2025-07-31T15:15:21.935+00:00",
+  "phone": "+880123456789",
+  "gender": "male",
+  "location": {
+    "division": "rajshahi-division",
+    "districts": "rajshahi-chapainawabganj-district",
+    "address": "sadar"
+  }
+}
+```
+
+### Update Agent (PATCH `/api/v1/agents/me`)
+
+```json
+{
+  "name": "demo User",
+  "dob": "2025-07-31T15:15:21.935+00:00",
+  "phone": "+880123456789",
+  "gender": "male",
+  "businessName": "demo shop",
+  "location": {
+    "division": "rajshahi-division",
+    "districts": "rajshahi-chapainawabganj-district",
+    "address": "sadar"
+  }
+}
+```
+
+### User Add Money (top up) & withdraw (POST `/api/v1/users/top-up` & `/api/v1/users/withdraw`)
+
+```json
+{
+  "amount": 10000
+}
+```
+
+### User send money (POST `/api/v1/users/send-money`)
+
+```json
+{
+  "amount": 10000,
+  "receiver": "demouser6@gmail.com"
+}
+```
+
+### Agent Add money to user (cash-in) (POST `/api/v1/agents/cash-in`)
+
+```json
+{
+  "amount": 10000,
+  "receiver": "demouser6@gmail.com"
+}
+```
+
+### Agent withdraw money from user (cash-out) (POST `/api/v1/agents/cash-out`)
+
+```json
+{
+  "amount": 10000,
+  "sender ": "demouser6@gmail.com"
+}
+```
+
+### Update user, agent, admin status (PATCH `/api/v1/admins/status/:email`)
+
+```json
+{
+  "status": "active"
+}
+```
+
+### Update Agent Approval Status (PATCH `/api/v1/admins/agents/approval/:email`)
+
+```json
+{
+  "isApproved": true
+}
+```
+
+### Update wallet Status (PATCH `/api/v1/admins/wallets/status/:ownerId`)
+
+```json
+{
+  "status": "active"
+}
+```
+
+### Create and Update Division (POST | PATCH `/api/v1/divisions` | `/api/v1/divisions/:slug`)
+
+```json
+{
+  "name": "Rajshahi"
+}
+```
+
+### Create and Update District (POST | PATCH `/api/v1/divisions` | `/api/v1/districts/:slug`)
+
+```json
+{
+  "name": "Chapainawabganj",
+  "division": "rajshahi-division"
+}
+```
+
 ## 📦 Clone The Repo
 
 ```bash
